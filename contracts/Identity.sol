@@ -8,16 +8,7 @@ import "./ClaimHolder.sol";
 
 
 
-// **Warning!** This file is a protoype version of our work around ERC 725.
-// This file is now out of date and **should not be used**.
-// Our current identity contracts are here:
-// https://github.com/OriginProtocol/origin/tree/master/origin-contracts/contracts/identity
 
-/**
- * NOTE: This contract exists as a convenience for deploying an identity with
- * some 'pre-signed' claims. If you don't care about that, just use ClaimHolder
- * instead.
- */
 
 contract Identity is ClaimHolder {
 

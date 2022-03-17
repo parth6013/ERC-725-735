@@ -19,13 +19,14 @@ import "./ERC725.sol";
 
 
     mapping (bytes32 => Key) keys;
-    // doubt in byte32 but valid - check
     mapping (uint256 => bytes32[]) keysByPurpose;
     mapping (uint256 => Execution) executions;
 
+// event to emit if execution failed
+event ExecutionFailed(uint256 indexed executionId, address indexed to, uint256 indexed value, bytes data);
 
-    event ExecutionFailed(uint256 indexed executionId, address indexed to, uint256 indexed value, bytes data);
-// constructor
+
+// constructor for key holder which assign caller with key with purpose 1
        function KeyHolder1() public {
 
         //  use encode pack or encode   
@@ -37,7 +38,7 @@ import "./ERC725.sol";
         emit KeyAdded(_key, keys[_key].purpose, 1);
     }
 
-// working
+// returns all the informaation about key when provided 32 bit hash key
     function   getKey(bytes32 _key)
         public
         override
@@ -47,7 +48,7 @@ import "./ERC725.sol";
         return (keys[_key].purpose, keys[_key].keyType, keys[_key].key);
     }
 
-// working
+// returns purpose of the key
     function getKeyPurpose(bytes32 _key)
         public
         override
@@ -56,7 +57,7 @@ import "./ERC725.sol";
     {
         return (keys[_key].purpose);
     }
-// working
+// gives array of key of required purpose
     function getKeysByPurpose(uint256 _purpose)
         public
         override
@@ -65,7 +66,7 @@ import "./ERC725.sol";
     {
         return keysByPurpose[_purpose];
     }
-
+// function to add key
     function addKey(bytes32 _key, uint256 _purpose, uint256 _type)
         public
         override
@@ -86,7 +87,7 @@ import "./ERC725.sol";
 
         return true;
     }
-// Doubt
+// function to  approve nonce
     function approve(uint256 _id, bool _approve)
         public
         override
@@ -124,7 +125,7 @@ import "./ERC725.sol";
         }
         return true;
     }
-
+// function to execute nonce
     function execute(address _to, uint256 _value, bytes memory _data)
         public
         override
@@ -144,7 +145,7 @@ import "./ERC725.sol";
         executionNonce++;
         return executionNonce-1;
     }
-
+// function to remove key 
     function removeKey(bytes32 _key)
         public
         returns (bool success)
@@ -160,7 +161,7 @@ import "./ERC725.sol";
 
         return true;
     }
-
+// function to check purpose of key 
     function keyHasPurpose(bytes32 _key, uint256 _purpose)
         public
         view

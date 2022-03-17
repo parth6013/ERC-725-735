@@ -2,10 +2,7 @@
 
 pragma solidity >=0.7.0 <0.9.0;
 
-// **Warning!** This file is a protoype version of our work around ERC 725.
-// This file is now out of date and **should not be used**.
-// Our current identity contracts are here:
-// https://github.com/OriginProtocol/origin/tree/master/origin-contracts/contracts/identity
+
 
 abstract contract ERC735 {
 
@@ -15,8 +12,8 @@ abstract contract ERC735 {
     event ClaimChanged(bytes32 indexed claimId, uint256 indexed claimType, uint256 scheme, address indexed issuer, bytes signature, bytes data, string uri);
 
     struct Claim {
-        uint256 claimType;
-        uint256 scheme;
+        uint256 claimType; // Different types of claims
+        uint256 scheme; // scheme can be different types of cryptographic functions such as ECDSA ..
         address issuer; // msg.sender
         bytes signature; // this.address + claimType + data
         bytes data;
